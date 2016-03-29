@@ -1,5 +1,5 @@
 import configs
-from panda3d.core import LPoint3, TextNode, NodePath
+from panda3d.core import LPoint3, TextNode, NodePath, Texture
 from panda3d.core import TransparencyAttrib, LineSegs, GeomTristrips, Geom, GeomVertexArrayFormat, GeomVertexFormat
 from direct.gui.DirectGui import DirectFrame, DGG, DirectButton, DirectCheckButton, DirectRadioButton
 
@@ -23,6 +23,8 @@ def loadObject(tex=None, pos=LPoint3(0, 0), scale=1,
     if tex:
         # Load and set the requested texture.
         tex = loader.loadTexture("textures/" + tex)
+        tex.setWrapU(Texture.WM_clamp)
+        tex.setWrapV(Texture.WM_clamp)
         obj.setTexture(tex, 1)
 
     return obj

@@ -55,15 +55,15 @@ def start_new_line(self, pos_x, pos_y, color):
 
 def player_win(self):
     if configs.GAME_WON == False:
-        winner = '2'
+        winner = ''
         configs.GAME_WON = True
         # sound = base.loader.loadSfx("sounds/endgame.ogg")
         # sound.setVolume(0.5)
         # sound.play()
-        # for entity_id, entity in configs.ENTITIES.items():
-        #     if entity['CATEGORY'] == 'player':
-        #         if entity['ALIVE'] == True:
-        #             winner = entity['PLAYER_NUMBER']  
+        for entity_id, entity in configs.ENTITIES.items():
+            if entity['CATEGORY'] == 'player':
+                if entity['ALIVE'] == True:
+                    winner = entity['PLAYER_NUMBER']  
 
         self.winner = OnscreenText(text="Player %s win" % winner, scale=0.2, pos=(0, 0),
                         fg=(1, 1, 1, 0.8), shadow=(0, 0, 0, 0.5))

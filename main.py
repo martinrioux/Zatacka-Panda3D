@@ -4,7 +4,7 @@ import configs
 configs.init_defines() 
 
 from object_loader import loadObject, create_button, spawnButton
-from panda3d.core import WindowProperties, Vec3, LVector3f, TransparencyAttrib
+from panda3d.core import WindowProperties, Vec3, LVector3f, TransparencyAttrib, AntialiasAttrib, loadPrcFileData
 from direct.task.Task import Task
 
 from players import update_players, init_player
@@ -19,6 +19,12 @@ import random
 import sys
 import copy
 from panda3d.core import PStatCollector, PStatClient, Shader
+
+myVariables = """
+framebuffer-multisample 1
+multisamples 2
+"""
+loadPrcFileData('internal', myVariables)
 
 class zatacka(ShowBase):
 
@@ -48,6 +54,8 @@ class zatacka(ShowBase):
         # PStatClient.connect()
         # Other keys events set the appropriate value in our key dictionary
         base.buttonThrowers[0].node().setKeystrokeEvent('keystroke')
+
+        render.setAntialias(AntialiasAttrib.MAuto)
 
         configs.PANDA3D = self
         self.accept('f6', self.changeCamera)
